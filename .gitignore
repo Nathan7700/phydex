@@ -1,0 +1,17 @@
+# Python (Arquivos compilados e cache)
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+
+# Configurações locais e Segredos
+.env
+
+# Docker e Banco de Dados (Evita salvar os dados locais do Postgres no Git)
+.database_data/
+
+# IDEs (VS Code, PyCharm, etc.)
+.vscode/
+.idea/
