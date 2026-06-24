@@ -9,8 +9,10 @@ ENV/
 # Configurações locais e Segredos
 .env
 
-# Docker e Banco de Dados (Evita salvar os dados locais do Postgres no Git)
+# Docker e Banco de Dados
 .database_data/
+*.db
+*.sqlite3
 
 # IDEs (VS Code, PyCharm, etc.)
 .vscode/
