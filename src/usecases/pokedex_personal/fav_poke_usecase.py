@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.infrastructure.db.models import FavoritoModelo
+from src.infrastructure.database.models import FavoritoModelo
 
 class FavoritePokemonUseCase:
     """Regra de negócio para o Usuário favoritar um Pokémon."""
