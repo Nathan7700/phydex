@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
-from src.infrastructure.database.sessao import Base
+from infrastructure.database.session import Base
 
 class TrainerModel(Base):
     __tablename__ = "trainer"

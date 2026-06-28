@@ -1,27 +1,25 @@
+# src/infrastructure/services/pokeapi_client.py
 import requests
-from fastapi import HTTPException, status
+from src.domain.services.ipokedex_service import IPokedexService
 
-class PokeApiClient:
+class PokeApiClient(IPokedexService):
     """Responsável exclusivo por se comunicar com a API externa PokéAPI."""
-    
-    def __init__(self):
-        self.base_url = "https://pokeapi.co/api/v2/pokemon"
 
-    def buscar_nome_por_id(self, pokemon_id: int) -> str:
+    def __init__(self):
+        self.base_url = "https://pokeapi.co/api/v2"
+
+    # O nome aqui deve bater EXATAMENTE com o método abstrato que deu erro no terminal
+    def buscar_dados_externos_pokemon(self, pokemon_id: int) -> dict:
+        url = f"{self.base_url}/pokemon/{pokemon_id}"
+        
         try:
-            url = f"{self.base_url}/{pokemon_id}"
             resposta = requests.get(url)
             
             if resposta.status_code == 404:
-                raise HTTPException(
-                    status_code=status.HTTP_404_NOT_FOUND, 
-                    detail="Pokémon não encontrado na PokéAPI externa."
-                )
+                raise ValueError("Pokémon não encontrado na PokéAPI externa.")
+                
+            resposta.raise_for_status()
+            return resposta.json()  # Retorna o dicionário completo com os dados do Pokémon
             
-            dados = resposta.json()
-            return dados["name"]
         except requests.exceptions.RequestException as e:
-            raise HTTPException(
-                status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
-                detail=f"Erro de conexão com a PokéAPI: {str(e)}"
-            )
+            raise ConnectionError(f"Erro de conexão com a PokéAPI: {str(e)}")
