@@ -6,7 +6,7 @@ import jwt
 
 from sqlalchemy.orm import Session
 
-from src.infrastructure.database.sessao import obter_bd
+from infrastructure.database.session import obter_bd
 
 from infrastructure.database.models import TrainerModel
 
